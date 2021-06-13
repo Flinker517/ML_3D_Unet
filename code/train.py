@@ -45,10 +45,10 @@ def main(args):
 
     databunch = DataBunch(dl_train, dl_val, collate_fn=FracNetTrainDataset.collate_fn)
     learn = Learner(databunch, model, opt_func=optimizer, loss_func=criterion, metrics=[dice, recall_partial, precision_partial, fbeta_score_partial])
-    learn.fit_one_cycle(10, 1e-1, pct_start=0, div_factor=1000, callbacks=[ShowGraph(learn),])
+    learn.fit_one_cycle(100, 1e-1, pct_start=0, div_factor=1000, callbacks=[ShowGraph(learn),])
 
     if args.save_model:
-        torch.save(model.module.state_dict(), "./model0.pth")
+        torch.save(model.module.state_dict(), "./model100.pth")
 
 
 if __name__ == "__main__":
